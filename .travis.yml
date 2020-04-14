@@ -37,6 +37,7 @@ script:
   # Fetch dependencies into the workspace
   - cd $AMENT_WS_SRC/ament
   - git clone https://github.com/ament/ament_cmake.git
+  - git clone https://github.com/ament/ament_index.git
   - git clone https://github.com/ament/ament_lint.git
   - git clone https://github.com/ament/ament_package.git
   - git clone https://github.com/ament/googletest.git
