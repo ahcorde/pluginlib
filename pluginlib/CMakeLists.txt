@@ -33,6 +33,9 @@ install(
 
 if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
+  find_package(ament_lint_auto REQUIRED)
+
+  ament_lint_auto_find_test_dependencies()
 
   # NOTE this block is also defined in pluginlib-extras.cmake
   # changes here need to be duplicated there
