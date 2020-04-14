@@ -27,34 +27,43 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <test_base.hpp>
+
 #include <gtest/gtest.h>
 
 #include <memory>
-#include <pluginlib/class_loader.hpp>  // NOLINT
 
 #include "rcutils/logging_macros.h"  // NOLINT
+#include <pluginlib/class_loader.hpp>  // NOLINT
 
-#include <test_base.h>
 
 TEST(PluginlibTest, unknownPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> test_loader("test_pluginlib", "test_base::Fubar");
-  ASSERT_THROW(test_loader.createSharedInstance("test_pluginlib/foobar"), pluginlib::LibraryLoadException);
+  ASSERT_THROW(
+    test_loader.createSharedInstance(
+      "test_pluginlib/foobar"), pluginlib::LibraryLoadException);
 }
 
 TEST(PluginlibTest, misspelledPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> bad_test_loader("test_pluginlib", "test_base::Fuba");
-  ASSERT_THROW(bad_test_loader.createSharedInstance("test_pluginlib/foo"), pluginlib::LibraryLoadException);
+  ASSERT_THROW(
+    bad_test_loader.createSharedInstance(
+      "test_pluginlib/foo"), pluginlib::LibraryLoadException);
 }
 
 TEST(PluginlibTest, invalidPackage) {
-  ASSERT_THROW(pluginlib::ClassLoader<test_base::Fubar>("test_pluginlib_bad",
-    "test_base::Fubar"),
+  ASSERT_THROW(
+    pluginlib::ClassLoader<test_base::Fubar>(
+      "test_pluginlib_bad",
+      "test_base::Fubar"),
     pluginlib::ClassLoaderException);
 }
 
 TEST(PluginlibTest, brokenPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> test_loader("test_pluginlib", "test_base::Fubar");
-  ASSERT_THROW(test_loader.createSharedInstance("test_pluginlib/none"), pluginlib::PluginlibException);
+  ASSERT_THROW(
+    test_loader.createSharedInstance(
+      "test_pluginlib/none"), pluginlib::PluginlibException);
 }
 
 TEST(PluginlibTest, workingPlugin) {

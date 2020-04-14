@@ -31,31 +31,36 @@
 
 #include <pluginlib/class_loader.hpp>
 
-#include <test_base.h>
+#include <test_base.hpp>
 
 TEST(PluginlibUniquePtrTest, unknownPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> test_loader("test_pluginlib", "test_base::Fubar");
-  ASSERT_THROW(test_loader.createUniqueInstance("test_pluginlib/foobar"),
+  ASSERT_THROW(
+    test_loader.createUniqueInstance("test_pluginlib/foobar"),
     pluginlib::LibraryLoadException);
 }
 
 
 TEST(PluginlibUniquePtrTest, misspelledPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> bad_test_loader("test_pluginlib", "test_base::Fuba");
-  ASSERT_THROW(bad_test_loader.createUniqueInstance(
+  ASSERT_THROW(
+    bad_test_loader.createUniqueInstance(
       "test_pluginlib/foo"), pluginlib::LibraryLoadException);
 }
 
 TEST(PluginlibTest, brokenPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> test_loader("test_pluginlib", "test_base::Fubar");
-  ASSERT_THROW(test_loader.createUniqueInstance("test_pluginlib/none"), pluginlib::PluginlibException);
+  ASSERT_THROW(
+    test_loader.createUniqueInstance(
+      "test_pluginlib/none"), pluginlib::PluginlibException);
 }
 
 TEST(PluginlibUniquePtrTest, workingPlugin) {
   pluginlib::ClassLoader<test_base::Fubar> test_loader("test_pluginlib", "test_base::Fubar");
 
   try {
-    pluginlib::UniquePtr<test_base::Fubar> foo = test_loader.createUniqueInstance("test_pluginlib/foo");
+    pluginlib::UniquePtr<test_base::Fubar> foo = test_loader.createUniqueInstance(
+      "test_pluginlib/foo");
     foo->initialize(10.0);
     EXPECT_EQ(100.0, foo->result());
   } catch (pluginlib::PluginlibException & ex) {

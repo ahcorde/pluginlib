@@ -27,8 +27,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TEST_PLUGINLIB_FIXTURE__VISIBILITY_CONTROL_HPP_
-#define TEST_PLUGINLIB_FIXTURE__VISIBILITY_CONTROL_HPP_
+#ifndef VISIBILITY_CONTROL_HPP_
+#define VISIBILITY_CONTROL_HPP_
 
 // This logic was borrowed (then namespaced) from the examples on the gcc wiki:
 //     https://gcc.gnu.org/wiki/Visibility
@@ -61,4 +61,4 @@
   #define TEST_PLUGINLIB_FIXTURE_PUBLIC_TYPE
 #endif
 
-#endif  // TEST_PLUGINLIB_FIXTURE__VISIBILITY_CONTROL_HPP_
+#endif  // VISIBILITY_CONTROL_HPP_
