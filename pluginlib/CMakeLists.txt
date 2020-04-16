@@ -134,6 +134,8 @@ if(BUILD_TESTING)
     add_dependencies(${PROJECT_NAME}_utest test_plugins)
   endif()
 
+  ament_add_gtest(${PROJECT_NAME}_split_test test/test_split.cpp)
+
 endif()
 
 ament_package(
